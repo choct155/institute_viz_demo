@@ -12,7 +12,7 @@ library(tidyverse)
 library(broom)
 library(plotly)
 
-setwd("/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/NYC Raw Data")
+setwd("/Users/ChenZhao/Documents/GitHub/institute_viz_demo/data/NYC Raw Data")
 
 ##### Plot.ly API settings
 Sys.setenv("plotly_username"="chendzhao")
@@ -30,7 +30,7 @@ read_files <- function(x) {
 }
 allboroughs = do.call(rbind, lapply(files, read_files))
 
-write_csv(allboroughs, "/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/allboroughs.csv", na = "NA", append = FALSE, col_names = TRUE) 
+#write_csv(allboroughs, "/Users/ChenZhao/Documents/GitHub/institute_viz_demo/data/NYC Raw Data/allboroughs.csv", na = "NA", append = FALSE, col_names = TRUE) 
 
 ######################## Clean data ########################
 # rename columns using all lower case and no spaces
@@ -224,40 +224,40 @@ dollarsales_937_bor <- ggplot(bybormonth937_sales, aes(x=month, y=dollarsales, g
 
 
 # save plots
-ggsave("/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/numsales_7501m.jpg",
+ggsave("/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/numsales_7501m.jpg",
        plot = numsales_7501m, device = NULL, path = NULL, scale = 1, width = 8, height = 4)
 
-ggsave("/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/dollarsales_7501m.jpg",
+ggsave("/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/dollarsales_7501m.jpg",
        plot = dollarsales_7501m, device = NULL, path = NULL, scale = 1, width = 8, height = 4)
 
-ggsave("/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/numsales_750.jpg",
+ggsave("/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/numsales_750.jpg",
        plot = numsales_750, device = NULL, path = NULL, scale = 1, width = 8, height = 4)
 
-ggsave("/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/dollarsales_750.jpg",
+ggsave("/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/dollarsales_750.jpg",
        plot = dollarsales_750, device = NULL, path = NULL, scale = 1, width = 8, height = 4)
 
-ggsave("/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/numsales_937.jpg",
+ggsave("/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/numsales_937.jpg",
        plot = numsales_937, device = NULL, path = NULL, scale = 1, width = 8, height = 4)
 
-ggsave("/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/dollarsales_937.jpg",
+ggsave("/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/dollarsales_937.jpg",
        plot = dollarsales_937, device = NULL, path = NULL, scale = 1, width = 8, height = 4)
 
-ggsave("/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/numsales_7501m_bor.jpg",
+ggsave("/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/numsales_7501m_bor.jpg",
        plot = numsales_7501m_bor, device = NULL, path = NULL, scale = 1, width = 8, height = 4)
 
-ggsave("/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/dollarsales_7501m_bor.jpg",
+ggsave("/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/dollarsales_7501m_bor.jpg",
        plot = dollarsales_7501m_bor, device = NULL, path = NULL, scale = 1, width = 8, height = 4)
 
-ggsave("/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/numsales_750_bor.jpg",
+ggsave("/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/numsales_750_bor.jpg",
        plot = numsales_750_bor, device = NULL, path = NULL, scale = 1, width = 8, height = 4)
 
-ggsave("/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/dollarsales_750_bor.jpg",
+ggsave("/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/dollarsales_750_bor.jpg",
        plot = dollarsales_750_bor, device = NULL, path = NULL, scale = 1, width = 8, height = 4)
 
-ggsave("/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/numsales_937_bor.jpg",
+ggsave("/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/numsales_937_bor.jpg",
        plot = numsales_937_bor, device = NULL, path = NULL, scale = 1, width = 8, height = 4)
 
-ggsave("/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/dollarsales_937_bor.jpg",
+ggsave("/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/dollarsales_937_bor.jpg",
        plot = dollarsales_937_bor, device = NULL, path = NULL, scale = 1, width = 8, height = 4)
 
 
@@ -284,20 +284,20 @@ reg_937k_bor <- lm(sale_price ~ above937k_dum + afterlaw + above937k_dum*afterla
 summary(reg_937k_bor)
 
 # save regression output
-write.csv(tidy(reg_750k1m), "/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/Research Challenge/reg_750k1m_coefs.csv")
-write.csv(glance(reg_750k1m), "/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/reg_750k1m_an.csv")
+write.csv(tidy(reg_750k1m), "/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/reg_750k1m_coefs.csv")
+write.csv(glance(reg_750k1m), "/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/reg_750k1m_an.csv")
 
-write.csv(tidy(reg_750k), "/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/reg_750k_coefs.csv")
-write.csv(glance(reg_750k), "/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/reg_750k_an.csv")
+write.csv(tidy(reg_750k), "/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/reg_750k_coefs.csv")
+write.csv(glance(reg_750k), "/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/reg_750k_an.csv")
 
-write.csv(tidy(reg_937k), "/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/reg_937k_coefs.csv")
-write.csv(glance(reg_937k), "/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/Research Challenge/reg_937k_an.csv")
+write.csv(tidy(reg_937k), "/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/reg_937k_coefs.csv")
+write.csv(glance(reg_937k), "/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/reg_937k_an.csv")
 
-write.csv(tidy(reg_750k1m_bor), "/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/reg_750k1m_bor_coefs.csv")
+write.csv(tidy(reg_750k1m_bor), "/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/reg_750k1m_bor_coefs.csv")
 write.csv(glance(reg_750k1m_bor), "/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/reg_750k1m_bor_an.csv")
 
-write.csv(tidy(reg_750k_bor), "/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/reg_750k_bor_coefs.csv")
-write.csv(glance(reg_750k_bor), "/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/reg_750k_bor_an.csv")
+write.csv(tidy(reg_750k_bor), "/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/reg_750k_bor_coefs.csv")
+write.csv(glance(reg_750k_bor), "/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/reg_750k_bor_an.csv")
 
-write.csv(tidy(reg_937k_bor), "/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/reg_937k_bor_coefs.csv")
-write.csv(glance(reg_937k_bor), "/Users/ChenZhao/Google Drive/JPMorgan/Plotly Test/reg_937k_bor_an.csv")
+write.csv(tidy(reg_937k_bor), "/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/reg_937k_bor_coefs.csv")
+write.csv(glance(reg_937k_bor), "/Users/ChenZhao/Documents/GitHub/institute_viz_demo/out/reg_937k_bor_an.csv")
