@@ -125,12 +125,34 @@ count(allboroughs_an1,afterlaw) #9,808 = 1, 40,976 = 0
 # 2. month and above/below 937k
 # 3. borough, month, and above/below 750k
 # 4. borough, month, and above/below 937k
+# 5. borough, month
 bymonth7501m_sales <- allboroughs_an1 %>% group_by(month, bet1m750k) %>% summarise(numsales = n(), dollarsales = median(sale_price))
 bymonth750_sales <- allboroughs_an1 %>% group_by(month, above750k) %>% summarise(numsales = n(), dollarsales = median(sale_price))
 bymonth937_sales <- allboroughs_an1 %>% group_by(month, above937k) %>% summarise(numsales = n(), dollarsales = median(sale_price))
 bybormonth7501m_sales <- allboroughs_an1 %>% group_by(borough, month, bet1m750k) %>% summarise(numsales = n(), dollarsales = median(sale_price))
 bybormonth750_sales <- allboroughs_an1 %>% group_by(borough, month, above750k) %>% summarise(numsales = n(), dollarsales = median(sale_price))
 bybormonth937_sales <- allboroughs_an1 %>% group_by(borough, month, above937k) %>% summarise(numsales = n(), dollarsales = median(sale_price))
+bybormonth_sales <- allboroughs_an1 %>% group_by(borough, month) %>% summarise(numsales = n(), dollarsales = median(sale_price))
+
+
+# plot the number of sales and dollar amount of sales by month and borough overall
+numsales_bor <- ggplot(bybormonth_sales, aes(x=month, y=numsales, fill=borough)) + 
+                  geom_bar(stat = "identity", position = "stack") +
+                  labs(x = "Month of Sale", y = "Number of Sales", title = "Number of Sales by Month and Borough") +
+                  theme(legend.position = "bottom", legend.title=element_blank())
+
+## export to Plotly
+numsales_bor <- ggplotly(numsales_bor)
+api_create(numsales_bor, "Number Sales by Month and Borough")
+
+dollarsales_bor <- ggplot(bybormonth_sales, aes(x=month, y=dollarsales, fill=borough)) + 
+  geom_bar(stat = "identity", position = "stack") +
+  labs(x = "Month of Sale", y = "Median Dollar Amount of Sales", title = "Dollar Amount of Sales by Month and Borough") +
+  theme(legend.position = "bottom", legend.title=element_blank())
+
+## export to Plotly
+dollarsales_bor <- ggplotly(dollarsales_bor)
+api_create(dollarsales_bor, "Dollar Sales by Month and Borough")
 
 # plot the number of sales and dollar amount of sales by month
 ## by between 750k and 1m vs. not
@@ -185,12 +207,18 @@ numsales_7501m_bor <- ggplot(bybormonth7501m_sales, aes(x=month, y=numsales, gro
                     labs(x = "Month of Sale", y = "Number of Sales", title = "Number of Sales by Month for Sales between $750,000 and $1,000,000 vs Not") +
                     theme(axis.text.x = element_text(angle=90, hjust=1), legend.position = "bottom", legend.title=element_blank())
 
-dollarsales_7501m_bor <- ggplot(bybormonth7501m_sales, aes(x=month, y=dollarsales, group=bet1m750k)) + 
+numsales_7501m_bor <- ggplotly(numsales_7501m_bor)
+api_create(numsales_7501m_bor, "Number Sales by Borough and Month for $750K to $1m v Not")
+
+numsales_7501m_bor <- ggplot(bybormonth7501m_sales, aes(x=month, y=dollarsales, group=bet1m750k)) + 
                        geom_line(aes(color=bet1m750k)) +
                        geom_point(aes(color=bet1m750k)) +
                        facet_wrap(~ borough) + 
                        labs(x = "Month of Sale", y = "Median Dollar Amount of Sales", title = "Median Dollar Amount of Sales by Month for Sales between $750,000 and $1,000,000 vs Not") +
                        theme(axis.text.x = element_text(angle=90, hjust=1), legend.position = "bottom", legend.title=element_blank())
+
+numsales_7501m_bor <- ggplotly(numsales_7501m_bor)
+api_create(numsales_7501m_bor, "Dollar Sales by Borough and Month for $750K to $1m v Not")
 
 ## by above and below 750k
 numsales_750_bor <- ggplot(bybormonth750_sales, aes(x=month, y=numsales, group=above750k)) + 
